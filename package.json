@@ -3,6 +3,8 @@
   "acronym": "Pool",
   "name": "PoolParty",
   "description": "PoolParty Semantic Suite taxonomy SPARQL lookups.",
+  "version": "0.0.1",
+  "private": true,
   "dependencies": {
     "sparql-client": "^0.2.0",
     "unirest": "^0.5.0",
