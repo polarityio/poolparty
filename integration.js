@@ -3,7 +3,7 @@
 var SparqlClient = require('sparql-client');
 var rest = require('unirest');
 var util = require('util');
-var _ = require('underscore');
+var _ = require('lodash');
 var async = require('async');
 
 var doLookup = function(entities, options, cb){
