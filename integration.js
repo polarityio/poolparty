@@ -21,9 +21,13 @@ var doLookup = function(entities, options, cb){
         'Accept': 'application/sparql-results+json'
     };
 
+    var jsonHeader = {
+        'Authorization': auth,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+    };
+
     async.each(entities, function(entity, done){
-        // Get the leaderName(s) of the given citys
-        // if you do not bind any city, it returns 10 random leaderNames
         var query = " PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
             " PREFIX skos:<http://www.w3.org/2004/02/skos/core#>" +
             " SELECT DISTINCT ?Concept ?prefLabel" +
@@ -42,37 +46,79 @@ var doLookup = function(entities, options, cb){
                 var results = response.body.results;
                 var tags = [];
                 var details = {};
+                var conceptUrls = [];
 
                 _.each(results.bindings, function(binding){
-                   tags.push(binding.prefLabel.value);
-                    details[binding.prefLabel.value] = "<a>" + binding.Concept.value + "</a>";
+                    conceptUrls.push(binding.Concept.value);
+                    tags.push(binding.prefLabel.value);
+                    //details[binding.prefLabel.value] = "<a>" + binding.Concept.value + "</a>";
                 });
 
-                if(tags.length > 0){
-                    lookupResults.push({
-                        entity: entity.value,
-                        result: {
-                            entity_name: entity.value,
-                            //the tags for summary
-                            tags: tags.splice(0,5),
-                            //Add the results object as the details
-                            details: details
-                        }
-                    });
-                }
+                console.info("ENTITY:");
+                console.info(entity.value);
+                console.info("GOT CONCEPTS");
+                console.info(conceptUrls);
 
-                done();
+                async.eachLimit(conceptUrls, 5, function(url, eachCallback){
+                    let lookupUrl = options.url + "/PoolParty/api/thesaurus/" + options.project + "/concept?concept=" + url +
+                        "&properties=all";
+                    console.info(lookupUrl);
+                    rest.get(lookupUrl)
+                        .headers(jsonHeader)
+                        .end(function(response){
+                            // console.info("LOOKED UP CONCEPT RESULTS:");
+                            // console.info(JSON.stringify(response.body, null, 4));
 
+                            if(response.code > 300 || !response.body){
+                                eachCallback(response.code);
+                                return;
+                            }
+
+                            let definition = '<No Definition Provided>';
+                            let prefLabel = '<No Pref Label Provided';
+
+                            if(typeof(response.body) !== 'undefined' && Array.isArray(response.body.definitions)){
+                                definition = response.body.definitions[0];
+                                prefLabel = response.body.prefLabel;
+                            }
+
+                            details[prefLabel] = definition;
+                            console.info("DETAILS:");
+                            console.info(JSON.stringify(details, null, 4));
+                            eachCallback(null);
+                        });
+                }, function(err){
+                    if(err){
+                        console.info("DEFINITION LOOKUP ERROR:");
+                        console.info(err);
+                    }
+
+                    console.info("PUSHING LOOKUP RESULTS");
+
+                    if(tags.length > 0){
+                        console.info("PUSHING LOOKUP RESULTS");
+                        lookupResults.push({
+                            entity: entity.value,
+                            result: {
+                                entity_name: entity.value,
+                                //the tags for summary
+                                tags: tags.splice(0,5),
+                                //Add the results object as the details
+                                details: details
+                            }
+                        });
+                    }
+
+                    done();
+                });
             });
 
     }, function(){
+        console.info("LOOKUP RESULTS:");
+        console.info(JSON.stringify(lookupResults, null, 4));
         cb(null, lookupResults.length, lookupResults);
     });
-
-
 };
-
-
 
 module.exports = {
     doLookup: doLookup
