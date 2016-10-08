@@ -6,8 +6,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "sparql-client": "^0.2.0",
-    "unirest": "^0.5.0",
+    "request": "^2.75",
     "lodash": "^4.16",
     "async": "^2.0"
   },
@@ -31,7 +30,7 @@
     },{
       "key"         : "username",
       "name"        : "Username",
-      "description" : "This is a description",
+      "description" : "PoolParty Account Username",
       "default"     : "",
       "type"        : "text",
       "user-can-edit" : true,
@@ -39,8 +38,8 @@
     },{
       "key"         : "password",
       "name"        : "password",
-      "description" : "This is a description",
-      "default"     : "PassW0rd12",
+      "description" : "PoolParty Account Password",
+      "default"     : "",
       "type"        : "password",
       "user-can-edit" : true,
       "admin-only"    : false
