@@ -40,6 +40,24 @@ var _validateStringOption = function (options, key) {
     return errors;
 };
 
+/**
+ * Helper method that creates a fully formed JSON payload for a single error
+ * @param msg
+ * @param pointer
+ * @param httpCode
+ * @param code
+ * @param title
+ * @returns {{errors: *[]}}
+ * @private
+ */
+var _createJsonErrorPayload = function(msg, pointer, httpCode, code, title){
+    return {
+        errors:[
+            _createJsonErrorObject(msg, pointer, httpCode, code, title)
+        ]
+    }
+};
+
 var _createJsonErrorObject = function(msg, pointer, httpCode, code, title){
     let error = {
         detail: msg,
@@ -83,17 +101,21 @@ var _lookupEntity = function (entity, options, done) {
         json: true
     }, function (err, response, body) {
         if (err) {
-            done(_createJsonErrorObject(err, null, '500', '2A', 'PoolParty HTTP Request Failed'));
+            done(_createJsonErrorPayload(err, null, '500', '2A', 'PoolParty HTTP Request Failed'));
             return;
         }
 
         if (response.statusCode !== 200) {
             if(response.statusCode === 401){
-                done(_createJsonErrorObject(typeof body.message === 'undefined' ? 'No Message in Response' : body.message,
-                    null, response.statusCode, '2B', 'PoolParty Authentication Failed'));
+                done(_createJsonErrorPayload('PoolParty Authentication Failed',
+                    null, response.statusCode, '2B', 'PoolParty Authentication Failed'), {
+                    responseMessage: body.message
+                });
             }else{
-                done(_createJsonErrorObject(typeof body.message === 'undefined' ? 'No Message in Response' : body.message,
-                    null, response.statusCode, '2C', 'PoolParty Entity Lookup Failed'));
+                done(_createJsonErrorPayload('PoolParty Entity Lookup Failed',
+                    null, response.statusCode, '2C', 'PoolParty Entity Lookup Failed'), {
+                    responseMessage: body.message
+                });
             }
             return;
         }
@@ -122,17 +144,21 @@ var _lookupDefinitions = function (conceptUrls, options, done) {
             console.info(JSON.stringify(body, null, 4));
 
             if (err) {
-                eachLimitCallback(_createJsonErrorObject(err, null, '500', '3A', 'PoolParty HTTP Request Failed'));
+                eachLimitCallback(_createJsonErrorPayload(err, null, '500', '3A', 'PoolParty HTTP Request Failed'));
                 return;
             }
 
             if (response.statusCode !== 200) {
                 if(response.statusCode === 401){
-                    eachLimitCallback(_createJsonErrorObject(typeof body.message === 'undefined' ? 'No Message in Response' : body.message,
-                        null, response.statusCode, '3B', 'PoolParty Authentication Failed'));
+                    eachLimitCallback(_createJsonErrorPayload('PoolParty Authentication Failed',
+                        null, response.statusCode, '3B', 'PoolParty Authentication Failed'), {
+                        responseMessage: body.message
+                    });
                 }else{
-                    eachLimitCallback(_createJsonErrorObject(typeof body.message === 'undefined' ? 'No Message in Response' : body.message,
-                        null, response.statusCode, '3C', 'PoolParty Definition Lookup Failed'));
+                    eachLimitCallback(_createJsonErrorPayload('PoolParty Definition Lookup Failed',
+                        null, response.statusCode, '3C', 'PoolParty Definition Lookup Failed'), {
+                        responseMessage: body.message
+                    });
                 }
                 return;
             }
