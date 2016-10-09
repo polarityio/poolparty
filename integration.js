@@ -18,9 +18,9 @@ var _validateOptions = function (options) {
         _validateStringOption(options, 'url'),
         _validateStringOption(options, 'project'));
 
-    if(errors.length > 0){
-        return {errors:errors};
-    }else{
+    if (errors.length > 0) {
+        return {errors: errors};
+    } else {
         return;
     }
 
@@ -50,15 +50,15 @@ var _validateStringOption = function (options, key) {
  * @returns {{errors: *[]}}
  * @private
  */
-var _createJsonErrorPayload = function(msg, pointer, httpCode, code, title, meta){
+var _createJsonErrorPayload = function (msg, pointer, httpCode, code, title, meta) {
     return {
-        errors:[
+        errors: [
             _createJsonErrorObject(msg, pointer, httpCode, code, title, meta)
         ]
     }
 };
 
-var _createJsonErrorObject = function(msg, pointer, httpCode, code, title, meta){
+var _createJsonErrorObject = function (msg, pointer, httpCode, code, title, meta) {
     let error = {
         detail: msg,
         status: httpCode.toString(),
@@ -66,13 +66,13 @@ var _createJsonErrorObject = function(msg, pointer, httpCode, code, title, meta)
         code: 'POOLPARTY_' + code.toString()
     };
 
-    if(pointer){
+    if (pointer) {
         error.source = {
             pointer: pointer
         };
     }
 
-    if(meta){
+    if (meta) {
         error.meta = meta;
     }
 
@@ -136,18 +136,18 @@ var _lookupEntity = function (entity, options, done) {
         }
 
         if (response.statusCode !== 200) {
-            if(response.statusCode === 401){
+            if (response.statusCode === 401) {
                 done(_createJsonErrorPayload('Authentication Failed',
                     null, response.statusCode, '2B', 'PoolParty Authentication Failed', {
                         responseMessage: body.message,
                         statusMessage: response.statusMessage
-                }));
-            }else{
+                    }));
+            } else {
                 done(_createJsonErrorPayload('Entity Lookup Failed [' + response.statusMessage + ']',
                     null, response.statusCode, '2C', 'PoolParty Entity Lookup Failed', {
                         responseMessage: body.message,
                         statusMessage: response.statusMessage
-                }));
+                    }));
             }
             return;
         }
@@ -155,61 +155,6 @@ var _lookupEntity = function (entity, options, done) {
         done(null, body);
     });
 };
-
-var _lookupDefinitions = function (conceptUrls, options, done) {
-    let details = {};
-    async.eachLimit(conceptUrls, 5, function (url, eachLimitCallback) {
-        let uri = options.url + "/PoolParty/api/thesaurus/" + options.project + "/concept?concept=" + url +
-            "&properties=all";
-
-        request({
-            uri: uri,
-            method: 'GET',
-            auth: {
-                user: options.username,
-                password: options.password
-            },
-            json: true
-        }, function (err, response, body) {
-
-            console.info("DEFINITION LOOKUP BODY:");
-            console.info(JSON.stringify(body, null, 4));
-
-            if (err) {
-                eachLimitCallback(_createJsonErrorPayload(err, null, '500', '3A', 'PoolParty HTTP Request Failed'));
-                return;
-            }
-
-            if (response.statusCode !== 200) {
-                if(response.statusCode === 401){
-                    eachLimitCallback(_createJsonErrorPayload('PoolParty Authentication Failed',
-                        null, response.statusCode, '3B', 'PoolParty Authentication Failed'), {
-                        responseMessage: body.message
-                    });
-                }else{
-                    eachLimitCallback(_createJsonErrorPayload('PoolParty Definition Lookup Failed',
-                        null, response.statusCode, '3C', 'PoolParty Definition Lookup Failed'), {
-                        responseMessage: body.message
-                    });
-                }
-                return;
-            }
-
-            let definition = '[No Definition Provided]';
-            let prefLabel = body.prefLabel;
-
-            if (typeof body !== 'undefined' && Array.isArray(body.definitions)) {
-                definition = response.body.definitions[0];
-            }
-
-            details[prefLabel] = definition;
-            eachLimitCallback(null);
-        });
-    }, function (err) {
-        done(err, details);
-    });
-};
-
 
 var doLookup = function (entities, options, cb) {
 
@@ -228,46 +173,109 @@ var doLookup = function (entities, options, cb) {
                 return;
             }
 
-            var tags = [];
-            var conceptUrls = [];
+            // console.info("LOOKUP ENTITY RESULT:");
+            // console.info(JSON.stringify(body, null, 4));
 
-            console.info("LOOKUP ENTITY RESULT:");
-            console.info(JSON.stringify(body, null, 4));
+            var entityResults = {};
+            var conceptPrefLabels = new Set();
 
-            _.each(body.results.bindings, function (binding) {
-                conceptUrls.push(binding.Concept.value);
-                tags.push(binding.prefLabel.value);
+            _.each(body.results.bindings, function (row) {
+                // Converts the row object from SPARQL into a formatted object that is easier to process
+                let formattedRow = _formatResultRow(row);
+
+                conceptPrefLabels.add(formattedRow.concept.prefLabel);
+
+                // Adds the row to the results object (note this method mutates the results object)
+                _addFormattedRowToResults(entityResults, formattedRow);
             });
 
-            _lookupDefinitions(conceptUrls, options, function (err, details) {
-                if (err) {
-                    done(err);
-                    return;
+            // console.info("LOOKUP FORMATTED RESULTS:");
+            // console.info(JSON.stringify(entityResults, null, 4));
+
+            lookupResults.push({
+                entity: entity.value,
+                result:{
+                    entity_name: entity.value,
+                    tags: Array.from(conceptPrefLabels),
+                    details: entityResults
                 }
-
-                console.info("LOOKUP DETAILS RESULT:");
-                console.info(JSON.stringify(details, null, 4));
-
-                if (tags.length > 0) {
-                    console.info("PUSHING LOOKUP RESULTS");
-                    lookupResults.push({
-                        entity: entity.value,
-                        result: {
-                            entity_name: entity.value,
-                            //the tags for summary
-                            tags: tags.splice(0, 5),
-                            //Add the results object as the details
-                            details: details
-                        }
-                    });
-                }
-
-                done(null);
             });
+
+            done(null)
         });
+
     }, function (err) {
         cb(err, lookupResults.length, lookupResults);
     });
+};
+
+var _formatResultRow = function(row){
+    let formattedRow = {};
+    // The concept and prefLabel are the only non-optional fields so they will always
+    // exist if a row is returned.
+    formattedRow.concept = {
+        uri: row.Concept.value,
+        prefLabel: row.prefLabel.value
+    };
+
+    if(row.definition){
+        formattedRow.definition = row.definition.value;
+    }
+
+    if (row.broaderConcept && row.broaderPrefLabel) {
+        formattedRow.broaderConcept = {
+            uri: row.broaderConcept.value,
+            prefLabel: row.broaderPrefLabel.value
+        }
+    }
+
+    if (row.narrowerConcept && row.narrowerPrefLabel) {
+        formattedRow.narrowerConcept = {
+            uri: row.narrowerConcept.value,
+            prefLabel: row.narrowerPrefLabel.value
+        }
+    }
+
+    if (row.relatedConcept && row.relatedPrefLabel) {
+        formattedRow.relatedConcept = {
+            uri: row.relatedConcept.value,
+            prefLabel: row.relatedPrefLabel.value
+        }
+    }
+
+    return formattedRow;
+};
+
+var _addFormattedRowToResults = function(results, formattedRow){
+    let conceptPrefLabel = formattedRow.concept.prefLabel;
+
+    if(!results[conceptPrefLabel]){
+        results[conceptPrefLabel] = {
+            concept: formattedRow.concept,
+            definition: '[No Definition]',
+            broaderConcepts: [],
+            narrowerConcepts: [],
+            relatedConcepts: []
+        };
+    }
+
+    if(formattedRow.definition){
+        results[conceptPrefLabel].definition = formattedRow.definition;
+    }
+
+    if(formattedRow.broaderConcept){
+        results[conceptPrefLabel].broaderConcepts.push(formattedRow.broaderConcept);
+    }
+
+    if(formattedRow.narrowerConcept){
+        results[conceptPrefLabel].narrowerConcepts.push(formattedRow.narrowerConcept);
+    }
+
+    if(formattedRow.relatedConcept){
+        results[conceptPrefLabel].relatedConcepts.push(formattedRow.relatedConcept);
+    }
+
+    return results;
 };
 
 module.exports = {
