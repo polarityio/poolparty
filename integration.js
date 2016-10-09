@@ -177,13 +177,13 @@ var doLookup = function (entities, options, cb) {
             // console.info(JSON.stringify(body, null, 4));
 
             var entityResults = {};
-            var conceptPrefLabels = new Set();
+            var conceptPrefLabelsSet = new Set();
 
             _.each(body.results.bindings, function (row) {
                 // Converts the row object from SPARQL into a formatted object that is easier to process
                 let formattedRow = _formatResultRow(row);
 
-                conceptPrefLabels.add(formattedRow.concept.prefLabel);
+                conceptPrefLabelsSet.add(formattedRow.concept.prefLabel);
 
                 // Adds the row to the results object (note this method mutates the results object)
                 _addFormattedRowToResults(entityResults, formattedRow);
@@ -192,14 +192,18 @@ var doLookup = function (entities, options, cb) {
             // console.info("LOOKUP FORMATTED RESULTS:");
             // console.info(JSON.stringify(entityResults, null, 4));
 
-            lookupResults.push({
-                entity: entity.value,
-                result:{
-                    entity_name: entity.value,
-                    tags: Array.from(conceptPrefLabels),
-                    details: entityResults
-                }
-            });
+            let conceptPrefLabels = Array.from(conceptPrefLabelsSet);
+
+            if(conceptPrefLabels.length > 0) {
+                lookupResults.push({
+                    entity: entity.value,
+                    result: {
+                        entity_name: entity.value,
+                        tags: conceptPrefLabels,
+                        details: entityResults
+                    }
+                });
+            }
 
             done(null)
         });
