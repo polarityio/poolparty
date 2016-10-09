@@ -1,13 +1,22 @@
 .poolparty-integration div.definition , .poolparty-integration div.concept-details{
     word-break:normal;
+    padding-left: 5px;
 }
 
 .poolparty-integration table.concepts{
     border-collapse: collapse;
 }
 
-.poolparty-integration tr.concept-block > td{
-    border: 1px solid rgba(0,0,0,.05);
+
+
+.poolparty-integration tr.concept-block h1{
+    margin: 0px;
+    padding: 2px 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 .poolparty-integration i.bt-external-link{
@@ -20,17 +29,19 @@
     margin-top: 5px;
 }
 
-.poolparty-integration div.concept-details h1{
+.poolparty-integration div.concept-details h2{
     margin: 0px;
+    margin-left: 10px;
     padding: 2px 5px;
     background-color: rgba(0, 0, 0, 0.06);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
     font-size: 1em;
 }
 
 .poolparty-integration div.concept-details ul{
     padding: 0;
     margin: 0;
+    margin-left: 15px;
+    margin-bottom: 5px;
 }
 
 .poolparty-integration div.concept-details ul > li{

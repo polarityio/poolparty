@@ -4,17 +4,17 @@
         <tr class="concept-block">
             <td>
                 <span class="concept">
-                    <strong>
+                    <h1>
                         <a href="{{data.concept.uri}}">{{data.concept.prefLabel}}</a>
-                    </strong>
-                    <i class="btb bt-external-link"></i>
+                        <i class="btb bt-external-link"></i>
+                    </h1>
                 </span>
                 <div class="definition">
                     {{data.definition}}
                 </div>
                 {{#if (gt data.broaderConcepts.length 0)}}
                 <div class="concept-details">
-                    <h1>Broader Concepts</h1>
+                    <h2>Broader Concepts</h2>
                     <ul>
                         {{#each data.broaderConcepts as |broaderConcept|}}
                             <li>
@@ -29,7 +29,7 @@
                 {{/if}}
                 {{#if (gt data.narrowerConcepts.length 0)}}
                 <div class="concept-details">
-                    <h1>Narrower Concepts</h1>
+                    <h2>Narrower Concepts</h2>
                     <ul>
                         {{#each data.narrowerConcepts as |narrowerConcept|}}
                             <li>
@@ -44,7 +44,7 @@
                 {{/if}}
                 {{#if (gt data.relatedConcepts.length 0)}}
                     <div class="concept-details">
-                        <h1>Related Concepts</h1>
+                        <h2>Related Concepts</h2>
                         <ul>
                             {{#each data.relatedConcepts as |relatedConcept|}}
                                 <li>
