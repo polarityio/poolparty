@@ -1,3 +1,8 @@
+/*
+ All integrations are namespaced with the class `<integration_name>-integration`.  When creating custom
+ css to style your integration you should ensure that all your classes are appropriately namespaced to prevent
+ your css from affecting other integrations.
+*/
 .poolparty-integration div.definition , .poolparty-integration div.concept-details{
     word-break:normal;
     padding-left: 5px;
@@ -6,8 +11,6 @@
 .poolparty-integration table.concepts{
     border-collapse: collapse;
 }
-
-
 
 .poolparty-integration tr.concept-block h1{
     margin: 0px;
