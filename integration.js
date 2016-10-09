@@ -194,6 +194,10 @@ var doLookup = function (entities, options, cb) {
 
             let conceptPrefLabels = Array.from(conceptPrefLabelsSet);
 
+            // The final entity results object needs to return arrays instead of sets so
+            // this method does the conversion for us
+            _convertEntityResults(entityResults);
+
             if(conceptPrefLabels.length > 0) {
                 lookupResults.push({
                     entity: entity.value,
@@ -211,6 +215,16 @@ var doLookup = function (entities, options, cb) {
     }, function (err) {
         cb(err, lookupResults.length, lookupResults);
     });
+};
+
+var _convertEntityResults = function(entityResults){
+    let keys = Object.keys(entityResults);
+    for(let i=0; i<keys.length; i++){
+        let key = keys[i];
+        delete entityResults[key].broaderConceptSet;
+        delete entityResults[key].narrowerConceptSet;
+        delete entityResults[key].relatedConceptSet;
+    }
 };
 
 var _formatResultRow = function(row){
@@ -258,8 +272,11 @@ var _addFormattedRowToResults = function(results, formattedRow){
             concept: formattedRow.concept,
             definition: '[No Definition]',
             broaderConcepts: [],
+            broaderConceptSet: new Set(),
             narrowerConcepts: [],
-            relatedConcepts: []
+            narrowerConceptSet: new Set(),
+            relatedConcepts: [],
+            relatedConceptSet: new Set()
         };
     }
 
@@ -268,15 +285,24 @@ var _addFormattedRowToResults = function(results, formattedRow){
     }
 
     if(formattedRow.broaderConcept){
-        results[conceptPrefLabel].broaderConcepts.push(formattedRow.broaderConcept);
+        if(!results[conceptPrefLabel].relatedConceptSet.has(formattedRow.broaderConcept.prefLabel)){
+            results[conceptPrefLabel].broaderConcepts.push(formattedRow.broaderConcept);
+            results[conceptPrefLabel].broaderConceptSet.add(formattedRow.broaderConcept.prefLabel);
+        }
     }
 
     if(formattedRow.narrowerConcept){
-        results[conceptPrefLabel].narrowerConcepts.push(formattedRow.narrowerConcept);
+        if(!results[conceptPrefLabel].narrowerConceptSet.has(formattedRow.narrowerConcept.prefLabel)){
+            results[conceptPrefLabel].narrowerConcepts.push(formattedRow.narrowerConcept);
+            results[conceptPrefLabel].narrowerConceptSet.add(formattedRow.narrowerConcept.prefLabel);
+        }
     }
 
     if(formattedRow.relatedConcept){
-        results[conceptPrefLabel].relatedConcepts.push(formattedRow.relatedConcept);
+        if(!results[conceptPrefLabel].relatedConceptSet.has(formattedRow.relatedConcept.prefLabel)){
+            results[conceptPrefLabel].relatedConcepts.push(formattedRow.relatedConcept);
+            results[conceptPrefLabel].relatedConceptSet.add(formattedRow.relatedConcept.prefLabel);
+        }
     }
 
     return results;
