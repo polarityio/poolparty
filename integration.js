@@ -211,7 +211,6 @@ var doLookup = function (entities, options, cb) {
 
             done(null)
         });
-
     }, function (err) {
         cb(err, lookupResults.length, lookupResults);
     });

@@ -12,7 +12,7 @@
                 <div class="definition">
                     {{data.definition}}
                 </div>
-                {{#if (gt data.broaderConcepts.length 0)}}
+                {{#if (and block.userOptions.showBroaderConcepts (gt data.broaderConcepts.length 0))}}
                 <div class="concept-details">
                     <h2>Broader Concepts</h2>
                     <ul>
@@ -27,7 +27,7 @@
                     </ul>
                 </div>
                 {{/if}}
-                {{#if (gt data.narrowerConcepts.length 0)}}
+                {{#if (and block.userOptions.showNarrowerConcepts (gt data.narrowerConcepts.length 0))}}
                 <div class="concept-details">
                     <h2>Narrower Concepts</h2>
                     <ul>
@@ -42,7 +42,7 @@
                     </ul>
                 </div>
                 {{/if}}
-                {{#if (gt data.relatedConcepts.length 0)}}
+                {{#if (and block.userOptions.showRelatedConcepts (gt data.relatedConcepts.length 0))}}
                     <div class="concept-details">
                         <h2>Related Concepts</h2>
                         <ul>

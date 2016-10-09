@@ -10,6 +10,7 @@
 
 .poolparty-integration table.concepts{
     border-collapse: collapse;
+    width: 100%;
 }
 
 .poolparty-integration tr.concept-block h1{
