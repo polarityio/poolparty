@@ -10,7 +10,7 @@ let options = {
 };
 
 poolparty.doLookup([{
-    value: 'bramble'
+    value: 'sour'
 }], options, function(err, length, result){
    if(err){
        console.info(JSON.stringify(err, null, 4));
