@@ -50,15 +50,15 @@ var _validateStringOption = function (options, key) {
  * @returns {{errors: *[]}}
  * @private
  */
-var _createJsonErrorPayload = function(msg, pointer, httpCode, code, title){
+var _createJsonErrorPayload = function(msg, pointer, httpCode, code, title, meta){
     return {
         errors:[
-            _createJsonErrorObject(msg, pointer, httpCode, code, title)
+            _createJsonErrorObject(msg, pointer, httpCode, code, title, meta)
         ]
     }
 };
 
-var _createJsonErrorObject = function(msg, pointer, httpCode, code, title){
+var _createJsonErrorObject = function(msg, pointer, httpCode, code, title, meta){
     let error = {
         detail: msg,
         status: httpCode.toString(),
@@ -72,6 +72,10 @@ var _createJsonErrorObject = function(msg, pointer, httpCode, code, title){
         };
     }
 
+    if(meta){
+        error.meta = meta;
+    }
+
     return error;
 };
 
@@ -80,13 +84,39 @@ var _createOptionsErrorObject = function (msg, pointer) {
 };
 
 var _lookupEntity = function (entity, options, done) {
-    let query = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> \
-         PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
-         SELECT DISTINCT ?Concept ?prefLabel \
-         WHERE \
-         { ?Concept ?x skos:Concept . \
-         { ?Concept skos:prefLabel ?prefLabel . FILTER (regex(str(?prefLabel), '" + entity.value + "', 'i'))  } \
-         } ORDER BY ?prefLabel LIMIT 50 OFFSET 0";
+    // let query = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> \
+    //      PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
+    //      SELECT DISTINCT ?Concept ?prefLabel \
+    //      WHERE \
+    //      { ?Concept ?x skos:Concept . \
+    //      { ?Concept skos:prefLabel ?prefLabel . FILTER (regex(str(?prefLabel), '" + entity.value + "', 'i'))  } \
+    //      } ORDER BY ?prefLabel LIMIT 50 OFFSET 0";
+
+
+    let query = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
+        SELECT DISTINCT ?Concept ?prefLabel ?definition ?broaderConcept  ?broaderPrefLabel ?narrowerConcept \
+         ?narrowerPrefLabel ?relatedConcept ?relatedPrefLabel \
+            WHERE{ \
+            ?Concept ?x skos:Concept . \
+            { \
+                ?Concept skos:prefLabel ?prefLabel . FILTER (regex(str(?prefLabel), '" + entity.value + "', 'i')) \
+            } \
+            OPTIONAL { \
+                ?Concept skos:definition ?definition . \
+        } \
+            OPTIONAL { \
+                ?Concept skos:broader ?broaderConcept . \
+                ?broaderConcept skos:prefLabel ?broaderPrefLabel \
+        } \
+            OPTIONAL{ \
+                ?Concept skos:narrower ?narrowerConcept  . \
+                ?narrowerConcept skos:prefLabel ?narrowerPrefLabel \
+        } \
+            OPTIONAL { \
+                ?Concept skos:related ?relatedConcept  . \
+                ?relatedConcept  skos:prefLabel ?relatedPrefLabel \
+        } \
+    } ORDER BY ?prefLabel LIMIT 100 OFFSET 0";
 
     let uri = options.url + "/PoolParty/sparql/" +
         options.project + "?query=" + encodeURIComponent(query) + "&content-type=application%2Fjson";
@@ -107,15 +137,17 @@ var _lookupEntity = function (entity, options, done) {
 
         if (response.statusCode !== 200) {
             if(response.statusCode === 401){
-                done(_createJsonErrorPayload('PoolParty Authentication Failed',
-                    null, response.statusCode, '2B', 'PoolParty Authentication Failed'), {
-                    responseMessage: body.message
-                });
+                done(_createJsonErrorPayload('Authentication Failed',
+                    null, response.statusCode, '2B', 'PoolParty Authentication Failed', {
+                        responseMessage: body.message,
+                        statusMessage: response.statusMessage
+                }));
             }else{
-                done(_createJsonErrorPayload('PoolParty Entity Lookup Failed',
-                    null, response.statusCode, '2C', 'PoolParty Entity Lookup Failed'), {
-                    responseMessage: body.message
-                });
+                done(_createJsonErrorPayload('Entity Lookup Failed [' + response.statusMessage + ']',
+                    null, response.statusCode, '2C', 'PoolParty Entity Lookup Failed', {
+                        responseMessage: body.message,
+                        statusMessage: response.statusMessage
+                }));
             }
             return;
         }

@@ -10,6 +10,17 @@
     "lodash": "^4.16",
     "async": "^2.0"
   },
+  "css":[
+    "./css/poolparty.css"
+  ],
+  "block": {
+    "component": {
+      "file": "./components/poolparty.js"
+    },
+    "template": {
+      "file": "./templates/poolparty.hbs"
+    }
+  },
   "options":[
     {
       "key"         : "url",

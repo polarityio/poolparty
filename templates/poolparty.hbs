@@ -1,0 +1,14 @@
+<table>
+    <tbody>
+    {{#each-in block.data.details as |concept definition|}}
+        <tr>
+            <td>
+                <span class="concept"><strong>{{concept}}</strong></span>
+                <div class="definition">
+                    {{definition}}
+                </div>
+            </td>
+        </tr>
+    {{/each-in}}
+    </tbody>
+</table>
