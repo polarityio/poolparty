@@ -131,7 +131,9 @@ var _lookupEntity = function (entity, options, done) {
         json: true
     }, function (err, response, body) {
         if (err) {
-            done(_createJsonErrorPayload(err, null, '500', '2A', 'PoolParty HTTP Request Failed'));
+            done(_createJsonErrorPayload("Unable to connect to PoolParty server", null, '500', '2A', 'PoolParty HTTP Request Failed', {
+                err: err
+            }));
             return;
         }
 
