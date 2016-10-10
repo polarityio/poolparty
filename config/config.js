@@ -1,4 +1,5 @@
 module.exports = {
+    "acronym":"Pool",
     "css":[
         "./css/poolparty.css"
     ],
