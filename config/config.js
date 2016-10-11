@@ -1,6 +1,6 @@
 module.exports = {
     "acronym":"Pool",
-    "css":[
+    "styles":[
         "./styles/poolparty.less"
     ],
     "block": {
