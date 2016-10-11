@@ -4,7 +4,7 @@ let poolparty = require('./integration');
 
 let options = {
     username: 'demoadmin',
-    password: '9u0Wcogr79Hi',
+    password: '',
     project: 'cocktails',
     url: 'https://enterprise.poolparty.biz'
 };
