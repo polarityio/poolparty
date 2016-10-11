@@ -1,7 +1,7 @@
 module.exports = {
     "acronym":"Pool",
     "css":[
-        "./css/poolparty.css"
+        "./styles/poolparty.less"
     ],
     "block": {
         "component": {

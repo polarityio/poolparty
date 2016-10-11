@@ -92,7 +92,6 @@ var _lookupEntity = function (entity, options, done) {
     //      { ?Concept skos:prefLabel ?prefLabel . FILTER (regex(str(?prefLabel), '" + entity.value + "', 'i'))  } \
     //      } ORDER BY ?prefLabel LIMIT 50 OFFSET 0";
 
-
     let query = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
         SELECT DISTINCT ?Concept ?prefLabel ?definition ?broaderConcept  ?broaderPrefLabel ?narrowerConcept \
          ?narrowerPrefLabel ?relatedConcept ?relatedPrefLabel \
