@@ -2,7 +2,7 @@
   "main": "./integration.js",
   "name": "PoolParty",
   "description": "PoolParty Semantic Suite taxonomy SPARQL lookups.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "request": "^2.75",

@@ -91,7 +91,7 @@ var _lookupEntity = function (entity, options, done) {
     //      { ?Concept ?x skos:Concept . \
     //      { ?Concept skos:prefLabel ?prefLabel . FILTER (regex(str(?prefLabel), '" + entity.value + "', 'i'))  } \
     //      } ORDER BY ?prefLabel LIMIT 50 OFFSET 0";
-
+    //console.info("Poolparty lookup: " + entity.value);
     let query = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
         SELECT DISTINCT ?Concept ?prefLabel ?definition ?broaderConcept  ?broaderPrefLabel ?narrowerConcept \
          ?narrowerPrefLabel ?relatedConcept ?relatedPrefLabel \
@@ -118,15 +118,21 @@ var _lookupEntity = function (entity, options, done) {
     } ORDER BY ?prefLabel LIMIT 100 OFFSET 0";
 
     let uri = options.url + "/PoolParty/sparql/" +
-        options.project + "?query=" + encodeURIComponent(query) + "&content-type=application%2Fjson";
+        options.project + "?query=" + encodeURIComponent(query) + "&format=application%2Fjson";
+
+    //console.info(uri);
 
     request({
         uri: uri,
         method: 'GET',
-        auth: {
-            user: options.username,
-            password: options.password
+        headers:{
+          'Content-Type': 'application/x-www-form-encoded'
         },
+        // auth: {
+        //     user: options.username,
+        //     password: options.password
+        //     //sendImmediately:false
+        // }
         json: true
     }, function (err, response, body) {
         if (err) {
@@ -135,6 +141,8 @@ var _lookupEntity = function (entity, options, done) {
             }));
             return;
         }
+        //console.info(options);
+        //console.info(JSON.stringify(body, null, 4));
 
         if (response.statusCode !== 200) {
             if (response.statusCode === 401) {
@@ -157,8 +165,7 @@ var _lookupEntity = function (entity, options, done) {
     });
 };
 
-var doLookup = function (entities, options, cb) {
-
+var doLookup = function (entities, options, cb) {    
     let errors = _validateOptions(options);
     if (errors) {
         cb(errors);
@@ -166,6 +173,7 @@ var doLookup = function (entities, options, cb) {
     }
 
     var lookupResults = [];
+    var entitiesWithNoData = [];
 
     async.each(entities, function (entity, done) {
         _lookupEntity(entity, options, function (err, body) {
@@ -201,19 +209,75 @@ var doLookup = function (entities, options, cb) {
 
             if(conceptPrefLabels.length > 0) {
                 lookupResults.push({
-                    entity: entity.value,
-                    result: {
-                        entity_name: entity.value,
-                        tags: conceptPrefLabels,
+                    /**
+                     * The entity object provided by the `doLookup` function
+                     *
+                     * @property entity
+                     * @type {Object}
+                     * @required
+                     */
+                    entity: entity,
+                    /**
+                     * Indicator for whether this lookup result is volatile.  If true, the result will not be cached.
+                     *
+                     * @property volatile
+                     * @type Boolean
+                     * @default false
+                     * @optional
+                     */
+                    volatile: false,
+                    /**
+                     * The display string used as the "title" for the notification window entity block.  This property
+                     * defaults to the value of `entity.value`.
+                     *
+                     * @property displayValue
+                     * @type String
+                     * @default entity.value
+                     * @optional
+                     */
+                    displayValue: entity.value.toUpperCase(),
+                    /**
+                     * Contains the summary and details results of the lookup operation.  If set to null, or not
+                     * provided then the fact that no results were found will be cached unless the `volatile` flag
+                     * is set to true in which cache no caching will be done.
+                     *
+                     * @property data
+                     * @type {Object}
+                     * @required
+                     */
+                    data: {
+                        /**
+                         * An array of strings to use as tags with the default summary template, or an object containing
+                         * data you want to passed to your custom summary template.
+                         *
+                         * @property data.summary
+                         * @type {String[]}|{Object}
+                         * @required
+                         */
+                        summary: conceptPrefLabels,
+                        /**
+                         * Data to be passed to the details block for this integration. If null, or undefined then
+                         * no details block will be rendered.
+                         *
+                         * @property data.details
+                         * @type {Object}
+                         * @optional
+                         */
                         details: entityResults
                     }
                 });
+            }else{
+                // No data for this entity
+                lookupResults.push({
+                    entity: entity,
+                    data: null
+                })
             }
-
             done(null)
         });
     }, function (err) {
-        cb(err, lookupResults.length, lookupResults);
+        //console.info(JSON.stringify(err, null, 4));
+        cb(err, lookupResults);
     });
 };
 
