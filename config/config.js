@@ -63,8 +63,8 @@ module.exports = {
             "description" : "If checked, the integration will show narrower concepts",
             "default"     : true,
             "type"        : "boolean",
-            "user-can-edit" : true,
-            "admin-only"    : false
+            "user-can-edit" : false,
+            "admin-only"    : true
         },
         {
             "key"         : "showRelatedConcepts",
@@ -72,8 +72,8 @@ module.exports = {
             "description" : "If checked, the integration will show related concepts",
             "default"     : true,
             "type"        : "boolean",
-            "user-can-edit" : true,
-            "admin-only"    : false
+            "user-can-edit" : false,
+            "admin-only"    : true
         }
     ]
 };

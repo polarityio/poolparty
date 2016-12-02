@@ -5,40 +5,6 @@ var util = require('util');
 var _ = require('lodash');
 var async = require('async');
 
-/**
- Validates integration options
-
- @param options
- @returns {{errors: (string|Array.<T>)}}
- @private
- */
-var _validateOptions = function (options) {
-    let errors = _validateStringOption(options, 'username').concat(
-        _validateStringOption(options, 'password'),
-        _validateStringOption(options, 'url'),
-        _validateStringOption(options, 'project'));
-
-    if (errors.length > 0) {
-        return {errors: errors};
-    } else {
-        return;
-    }
-
-};
-
-var _validateStringOption = function (options, key) {
-    let errors = [];
-
-    if (!_.isString(options[key])) {
-        errors.push(_createOptionsErrorObject('The integration option `' + key + '`', key));
-    }
-
-    if (options[key].length === 0) {
-        errors.push(_createOptionsErrorObject('The integration option `' + key + '` must be at least 1 character', key));
-    }
-
-    return errors;
-};
 
 /**
  * Helper method that creates a fully formed JSON payload for a single error
@@ -77,10 +43,6 @@ var _createJsonErrorObject = function (msg, pointer, httpCode, code, title, meta
     }
 
     return error;
-};
-
-var _createOptionsErrorObject = function (msg, pointer) {
-    return _createJsonErrorObject(msg, pointer, '422', '1A', 'PoolParty Option Validation Failed');
 };
 
 var _lookupEntity = function (entity, options, done) {
@@ -125,8 +87,8 @@ var _lookupEntity = function (entity, options, done) {
     request({
         uri: uri,
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/x-www-form-encoded'
+        headers: {
+            'Content-Type': 'application/x-www-form-encoded'
         },
         // auth: {
         //     user: options.username,
@@ -165,13 +127,7 @@ var _lookupEntity = function (entity, options, done) {
     });
 };
 
-var doLookup = function (entities, options, cb) {    
-    let errors = _validateOptions(options);
-    if (errors) {
-        cb(errors);
-        return;
-    }
-
+var doLookup = function (entities, options, cb) {
     var lookupResults = [];
     var entitiesWithNoData = [];
 
@@ -207,7 +163,7 @@ var doLookup = function (entities, options, cb) {
             // this method does the conversion for us
             _convertEntityResults(entityResults);
 
-            if(conceptPrefLabels.length > 0) {
+            if (conceptPrefLabels.length > 0) {
                 lookupResults.push({
                     /**
                      * The entity object provided by the `doLookup` function
@@ -220,12 +176,12 @@ var doLookup = function (entities, options, cb) {
                     /**
                      * Indicator for whether this lookup result is volatile.  If true, the result will not be cached.
                      *
-                     * @property volatile
+                     * @property isVolatile
                      * @type Boolean
                      * @default false
                      * @optional
                      */
-                    volatile: false,
+                    isVolatile: true,
                     /**
                      * The display string used as the "title" for the notification window entity block.  This property
                      * defaults to the value of `entity.value`.
@@ -266,7 +222,7 @@ var doLookup = function (entities, options, cb) {
                         details: entityResults
                     }
                 });
-            }else{
+            } else {
                 // No data for this entity
                 lookupResults.push({
                     entity: entity,
@@ -281,9 +237,9 @@ var doLookup = function (entities, options, cb) {
     });
 };
 
-var _convertEntityResults = function(entityResults){
+var _convertEntityResults = function (entityResults) {
     let keys = Object.keys(entityResults);
-    for(let i=0; i<keys.length; i++){
+    for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
         delete entityResults[key].broaderConceptSet;
         delete entityResults[key].narrowerConceptSet;
@@ -291,7 +247,7 @@ var _convertEntityResults = function(entityResults){
     }
 };
 
-var _formatResultRow = function(row){
+var _formatResultRow = function (row) {
     let formattedRow = {};
     // The concept and prefLabel are the only non-optional fields so they will always
     // exist if a row is returned.
@@ -300,7 +256,7 @@ var _formatResultRow = function(row){
         prefLabel: row.prefLabel.value
     };
 
-    if(row.definition){
+    if (row.definition) {
         formattedRow.definition = row.definition.value;
     }
 
@@ -328,10 +284,10 @@ var _formatResultRow = function(row){
     return formattedRow;
 };
 
-var _addFormattedRowToResults = function(results, formattedRow){
+var _addFormattedRowToResults = function (results, formattedRow) {
     let conceptPrefLabel = formattedRow.concept.prefLabel;
 
-    if(!results[conceptPrefLabel]){
+    if (!results[conceptPrefLabel]) {
         results[conceptPrefLabel] = {
             concept: formattedRow.concept,
             definition: '[No Definition]',
@@ -344,26 +300,26 @@ var _addFormattedRowToResults = function(results, formattedRow){
         };
     }
 
-    if(formattedRow.definition){
+    if (formattedRow.definition) {
         results[conceptPrefLabel].definition = formattedRow.definition;
     }
 
-    if(formattedRow.broaderConcept){
-        if(!results[conceptPrefLabel].relatedConceptSet.has(formattedRow.broaderConcept.prefLabel)){
+    if (formattedRow.broaderConcept) {
+        if (!results[conceptPrefLabel].relatedConceptSet.has(formattedRow.broaderConcept.prefLabel)) {
             results[conceptPrefLabel].broaderConcepts.push(formattedRow.broaderConcept);
             results[conceptPrefLabel].broaderConceptSet.add(formattedRow.broaderConcept.prefLabel);
         }
     }
 
-    if(formattedRow.narrowerConcept){
-        if(!results[conceptPrefLabel].narrowerConceptSet.has(formattedRow.narrowerConcept.prefLabel)){
+    if (formattedRow.narrowerConcept) {
+        if (!results[conceptPrefLabel].narrowerConceptSet.has(formattedRow.narrowerConcept.prefLabel)) {
             results[conceptPrefLabel].narrowerConcepts.push(formattedRow.narrowerConcept);
             results[conceptPrefLabel].narrowerConceptSet.add(formattedRow.narrowerConcept.prefLabel);
         }
     }
 
-    if(formattedRow.relatedConcept){
-        if(!results[conceptPrefLabel].relatedConceptSet.has(formattedRow.relatedConcept.prefLabel)){
+    if (formattedRow.relatedConcept) {
+        if (!results[conceptPrefLabel].relatedConceptSet.has(formattedRow.relatedConcept.prefLabel)) {
             results[conceptPrefLabel].relatedConcepts.push(formattedRow.relatedConcept);
             results[conceptPrefLabel].relatedConceptSet.add(formattedRow.relatedConcept.prefLabel);
         }
@@ -372,6 +328,46 @@ var _addFormattedRowToResults = function(results, formattedRow){
     return results;
 };
 
+/**
+ Validates integration options
+
+ @param options
+ @returns {{errors: (string|Array.<T>)}}
+ @private
+ */
+function validateOptions(userOptions, cb) {
+    console.info("CALLING VALIDATE OPTIONS IN POOLPARTY");
+    console.info(userOptions);
+
+    let errors = _validateStringOption(userOptions, 'username').concat(
+        _validateStringOption(userOptions, 'password'),
+        _validateStringOption(userOptions, 'url'),
+        _validateStringOption(userOptions, 'project'));
+
+    cb(null, errors);
+}
+
+var _validateStringOption = function (options, key) {
+    let errors = [];
+
+    if (!_.isString(options[key].value)) {
+        errors.push({
+            message: 'You must provide a value for this option',
+            key: key
+        });
+    }
+
+    if (options[key].value.length === 0) {
+        errors.push({
+            message: 'The value must be at least 1 character',
+            key: key
+        });
+    }
+
+    return errors;
+};
+
 module.exports = {
-    doLookup: doLookup
+    doLookup: doLookup,
+    validateOptions: validateOptions
 };
