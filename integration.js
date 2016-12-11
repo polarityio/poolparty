@@ -163,6 +163,7 @@ var doLookup = function (entities, options, cb) {
             // this method does the conversion for us
             _convertEntityResults(entityResults);
 
+
             if (conceptPrefLabels.length > 0) {
                 lookupResults.push({
                     /**
@@ -181,7 +182,7 @@ var doLookup = function (entities, options, cb) {
                      * @default false
                      * @optional
                      */
-                    isVolatile: true,
+                    isVolatile: false,
                     /**
                      * The display string used as the "title" for the notification window entity block.  This property
                      * defaults to the value of `entity.value`.
