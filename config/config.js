@@ -18,8 +18,8 @@ module.exports = {
             "description" : "",
             "default"     : "",
             "type"        : "text",
-            "user-can-edit" : true,
-            "admin-only"    : false
+            "userCanEdit" : true,
+            "adminOnly"    : false
         },
         {
             "key"         : "project",
@@ -27,8 +27,8 @@ module.exports = {
             "description" : "",
             "default"     : "CocktailsTaxonomie",
             "type"        : "text",
-            "user-can-edit" : true,
-            "admin-only"    : false
+            "userCanEdit" : true,
+            "adminOnly"    : false
         },
         {
             "key"         : "username",
@@ -36,8 +36,8 @@ module.exports = {
             "description" : "PoolParty Account Username",
             "default"     : "",
             "type"        : "text",
-            "user-can-edit" : true,
-            "admin-only"    : false
+            "userCanEdit" : true,
+            "adminOnly"    : false
         },
         {
             "key"         : "password",
@@ -45,8 +45,8 @@ module.exports = {
             "description" : "PoolParty Account Password",
             "default"     : "",
             "type"        : "password",
-            "user-can-edit" : true,
-            "admin-only"    : false
+            "userCanEdit" : true,
+            "adminOnly"    : false
         },
         {
             "key"         : "showBroaderConcepts",
@@ -54,8 +54,8 @@ module.exports = {
             "description" : "If checked, the integration will show broader concepts",
             "default"     : true,
             "type"        : "boolean",
-            "user-can-edit" : true,
-            "admin-only"    : false
+            "userCanEdit" : true,
+            "adminOnly"    : false
         },
         {
             "key"         : "showNarrowerConcepts",
@@ -63,8 +63,8 @@ module.exports = {
             "description" : "If checked, the integration will show narrower concepts",
             "default"     : true,
             "type"        : "boolean",
-            "user-can-edit" : false,
-            "admin-only"    : true
+            "userCanEdit" : false,
+            "adminOnly"    : true
         },
         {
             "key"         : "showRelatedConcepts",
@@ -72,8 +72,8 @@ module.exports = {
             "description" : "If checked, the integration will show related concepts",
             "default"     : true,
             "type"        : "boolean",
-            "user-can-edit" : false,
-            "admin-only"    : true
+            "userCanEdit" : false,
+            "adminOnly"    : true
         }
     ]
 };

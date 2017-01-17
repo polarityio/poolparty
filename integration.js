@@ -209,7 +209,8 @@ var doLookup = function (entities, options, cb) {
                          *
                          * @property data.summary
                          * @type {String[]}|{Object}
-                         * @required
+                         * @default [] (empty array)
+                         * @optional
                          */
                         summary: conceptPrefLabels,
                         /**
