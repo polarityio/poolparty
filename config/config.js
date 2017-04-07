@@ -1,7 +1,12 @@
 module.exports = {
     "acronym":"Pool",
-    "entityTypes": ["string"],
-    "logging": { level: 'info'},
+    "customTypes": [
+        {
+            key: 'all',
+            regex: /.*/
+        }
+    ],
+    "logging": { level: 'debug'},
     "styles":[
         "./styles/poolparty.less"
     ],
