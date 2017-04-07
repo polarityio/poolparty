@@ -1,10 +1,14 @@
 'use strict';
 
-var request = require('request');
-var util = require('util');
-var _ = require('lodash');
-var async = require('async');
+let request = require('request');
+let util = require('util');
+let _ = require('lodash');
+let async = require('async');
+let Logger;
 
+function startup(logger){
+    Logger = logger;
+}
 
 /**
  * Helper method that creates a fully formed JSON payload for a single error
@@ -16,15 +20,15 @@ var async = require('async');
  * @returns {{errors: *[]}}
  * @private
  */
-var _createJsonErrorPayload = function (msg, pointer, httpCode, code, title, meta) {
+function _createJsonErrorPayload(msg, pointer, httpCode, code, title, meta) {
     return {
         errors: [
             _createJsonErrorObject(msg, pointer, httpCode, code, title, meta)
         ]
     }
-};
+}
 
-var _createJsonErrorObject = function (msg, pointer, httpCode, code, title, meta) {
+function _createJsonErrorObject(msg, pointer, httpCode, code, title, meta) {
     let error = {
         detail: msg,
         status: httpCode.toString(),
@@ -43,17 +47,9 @@ var _createJsonErrorObject = function (msg, pointer, httpCode, code, title, meta
     }
 
     return error;
-};
+}
 
-var _lookupEntity = function (entity, options, done) {
-    // let query = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> \
-    //      PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
-    //      SELECT DISTINCT ?Concept ?prefLabel \
-    //      WHERE \
-    //      { ?Concept ?x skos:Concept . \
-    //      { ?Concept skos:prefLabel ?prefLabel . FILTER (regex(str(?prefLabel), '" + entity.value + "', 'i'))  } \
-    //      } ORDER BY ?prefLabel LIMIT 50 OFFSET 0";
-    //console.info("Poolparty lookup: " + entity.value);
+function _lookupEntity(entity, options, done) {
     let query = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
         SELECT DISTINCT ?Concept ?prefLabel ?definition ?broaderConcept  ?broaderPrefLabel ?narrowerConcept \
          ?narrowerPrefLabel ?relatedConcept ?relatedPrefLabel \
@@ -82,19 +78,12 @@ var _lookupEntity = function (entity, options, done) {
     let uri = options.url + "/PoolParty/sparql/" +
         options.project + "?query=" + encodeURIComponent(query) + "&format=application%2Fjson";
 
-    //console.info(uri);
-
     request({
         uri: uri,
         method: 'GET',
         headers: {
             'Content-Type': 'application/x-www-form-encoded'
         },
-        // auth: {
-        //     user: options.username,
-        //     password: options.password
-        //     //sendImmediately:false
-        // }
         json: true
     }, function (err, response, body) {
         if (err) {
@@ -103,8 +92,6 @@ var _lookupEntity = function (entity, options, done) {
             }));
             return;
         }
-        //console.info(options);
-        //console.info(JSON.stringify(body, null, 4));
 
         if (response.statusCode !== 200) {
             if (response.statusCode === 401) {
@@ -125,11 +112,12 @@ var _lookupEntity = function (entity, options, done) {
 
         done(null, body);
     });
-};
+}
 
-var doLookup = function (entities, options, cb) {
-    var lookupResults = [];
-    var entitiesWithNoData = [];
+function doLookup(entities, options, cb) {
+    let lookupResults = [];
+
+    Logger.debug({entities: entities, options: options}, 'Entities for Lookup');
 
     async.each(entities, function (entity, done) {
         _lookupEntity(entity, options, function (err, body) {
@@ -138,11 +126,8 @@ var doLookup = function (entities, options, cb) {
                 return;
             }
 
-            // console.info("LOOKUP ENTITY RESULT:");
-            // console.info(JSON.stringify(body, null, 4));
-
-            var entityResults = {};
-            var conceptPrefLabelsSet = new Set();
+            let entityResults = {};
+            let conceptPrefLabelsSet = new Set();
 
             _.each(body.results.bindings, function (row) {
                 // Converts the row object from SPARQL into a formatted object that is easier to process
@@ -153,9 +138,6 @@ var doLookup = function (entities, options, cb) {
                 // Adds the row to the results object (note this method mutates the results object)
                 _addFormattedRowToResults(entityResults, formattedRow);
             });
-
-            // console.info("LOOKUP FORMATTED RESULTS:");
-            // console.info(JSON.stringify(entityResults, null, 4));
 
             let conceptPrefLabels = Array.from(conceptPrefLabelsSet);
 
@@ -234,12 +216,11 @@ var doLookup = function (entities, options, cb) {
             done(null)
         });
     }, function (err) {
-        //console.info(JSON.stringify(err, null, 4));
         cb(err, lookupResults);
     });
-};
+}
 
-var _convertEntityResults = function (entityResults) {
+function _convertEntityResults(entityResults) {
     let keys = Object.keys(entityResults);
     for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
@@ -247,9 +228,9 @@ var _convertEntityResults = function (entityResults) {
         delete entityResults[key].narrowerConceptSet;
         delete entityResults[key].relatedConceptSet;
     }
-};
+}
 
-var _formatResultRow = function (row) {
+function _formatResultRow(row) {
     let formattedRow = {};
     // The concept and prefLabel are the only non-optional fields so they will always
     // exist if a row is returned.
@@ -284,9 +265,9 @@ var _formatResultRow = function (row) {
     }
 
     return formattedRow;
-};
+}
 
-var _addFormattedRowToResults = function (results, formattedRow) {
+function _addFormattedRowToResults(results, formattedRow) {
     let conceptPrefLabel = formattedRow.concept.prefLabel;
 
     if (!results[conceptPrefLabel]) {
@@ -328,7 +309,7 @@ var _addFormattedRowToResults = function (results, formattedRow) {
     }
 
     return results;
-};
+}
 
 /**
  Validates integration options
@@ -338,9 +319,6 @@ var _addFormattedRowToResults = function (results, formattedRow) {
  @private
  */
 function validateOptions(userOptions, cb) {
-    console.info("CALLING VALIDATE OPTIONS IN POOLPARTY");
-    console.info(userOptions);
-
     let errors = _validateStringOption(userOptions, 'username').concat(
         _validateStringOption(userOptions, 'password'),
         _validateStringOption(userOptions, 'url'),
@@ -349,7 +327,7 @@ function validateOptions(userOptions, cb) {
     cb(null, errors);
 }
 
-var _validateStringOption = function (options, key) {
+function _validateStringOption(options, key) {
     let errors = [];
 
     if (!_.isString(options[key].value)) {
@@ -367,9 +345,10 @@ var _validateStringOption = function (options, key) {
     }
 
     return errors;
-};
+}
 
 module.exports = {
     doLookup: doLookup,
-    validateOptions: validateOptions
+    validateOptions: validateOptions,
+    startup: startup
 };
