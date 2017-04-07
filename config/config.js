@@ -1,5 +1,7 @@
 module.exports = {
     "acronym":"Pool",
+    "entityTypes": ["string"],
+    "logging": { level: 'info'},
     "styles":[
         "./styles/poolparty.less"
     ],
@@ -11,7 +13,6 @@ module.exports = {
             "file": "./templates/poolparty.hbs"
         }
     },
-    "entityTypes": ["string"],
     "options":[
         {
             "key"         : "url",
