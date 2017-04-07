@@ -11,6 +11,7 @@ module.exports = {
             "file": "./templates/poolparty.hbs"
         }
     },
+    "entityTypes": ["string"],
     "options":[
         {
             "key"         : "url",
@@ -25,7 +26,7 @@ module.exports = {
             "key"         : "project",
             "name"        : "Project Name",
             "description" : "",
-            "default"     : "CocktailsTaxonomie",
+            "default"     : "",
             "type"        : "text",
             "userCanEdit" : true,
             "adminOnly"    : false

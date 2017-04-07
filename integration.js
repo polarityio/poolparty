@@ -192,7 +192,7 @@ var doLookup = function (entities, options, cb) {
                      * @default entity.value
                      * @optional
                      */
-                    displayValue: entity.value.toUpperCase(),
+                    displayValue: entity.value,
                     /**
                      * Contains the summary and details results of the lookup operation.  If set to null, or not
                      * provided then the fact that no results were found will be cached unless the `volatile` flag
