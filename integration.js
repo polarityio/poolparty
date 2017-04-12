@@ -6,7 +6,7 @@ let _ = require('lodash');
 let async = require('async');
 let Logger;
 
-function startup(logger){
+function startup(logger) {
     Logger = logger;
 }
 
@@ -50,39 +50,22 @@ function _createJsonErrorObject(msg, pointer, httpCode, code, title, meta) {
 }
 
 function _lookupEntity(entity, options, done) {
-    let query = "PREFIX skos:<http://www.w3.org/2004/02/skos/core#> \
-        SELECT DISTINCT ?Concept ?prefLabel ?definition ?broaderConcept  ?broaderPrefLabel ?narrowerConcept \
-         ?narrowerPrefLabel ?relatedConcept ?relatedPrefLabel \
-            WHERE{ \
-            ?Concept ?x skos:Concept . \
-            { \
-                ?Concept skos:prefLabel ?prefLabel . FILTER (regex(str(?prefLabel), '" + entity.value + "', 'i')) \
-            } \
-            OPTIONAL { \
-                ?Concept skos:definition ?definition . \
-        } \
-            OPTIONAL { \
-                ?Concept skos:broader ?broaderConcept . \
-                ?broaderConcept skos:prefLabel ?broaderPrefLabel \
-        } \
-            OPTIONAL{ \
-                ?Concept skos:narrower ?narrowerConcept  . \
-                ?narrowerConcept skos:prefLabel ?narrowerPrefLabel \
-        } \
-            OPTIONAL { \
-                ?Concept skos:related ?relatedConcept  . \
-                ?relatedConcept  skos:prefLabel ?relatedPrefLabel \
-        } \
-    } ORDER BY ?prefLabel LIMIT 100 OFFSET 0";
-
-    let uri = options.url + "/PoolParty/sparql/" +
-        options.project + "?query=" + encodeURIComponent(query) + "&format=application%2Fjson";
+    let uri = options.url + "/extractor/api/categorization";
 
     request({
         uri: uri,
+        qs: {
+            projectId: options.projectId,
+            language: options.language,
+            text: entity.value
+        },
         method: 'GET',
         headers: {
             'Content-Type': 'application/x-www-form-encoded'
+        },
+        auth: {
+            'user': options.username,
+            'pass': options.password
         },
         json: true
     }, function (err, response, body) {
@@ -126,27 +109,32 @@ function doLookup(entities, options, cb) {
                 return;
             }
 
-            let entityResults = {};
-            let conceptPrefLabelsSet = new Set();
+            let categories = [];
+            let conceptsSummaryTags = new Set();
 
-            _.each(body.results.bindings, function (row) {
-                // Converts the row object from SPARQL into a formatted object that is easier to process
-                let formattedRow = _formatResultRow(row);
+            body.categories.forEach(function(category){
+                if(category.score >= options.minimumCategoryScore){
+                    let tmpCategory = {
+                        score: category.score,
+                        uri: category.uri,
+                        prefLabel: category.prefLabel,
+                        categoryConceptResults: []
+                    };
 
-                conceptPrefLabelsSet.add(formattedRow.concept.prefLabel);
+                    category.categoryConceptResults.forEach(function(concept){
+                        if(concept.score >= options.minimumConceptScore){
+                            tmpCategory.categoryConceptResults.push(concept);
+                            conceptsSummaryTags.add(concept.prefLabel);
+                        }
+                    });
 
-                // Adds the row to the results object (note this method mutates the results object)
-                _addFormattedRowToResults(entityResults, formattedRow);
+                    if(tmpCategory.categoryConceptResults.length > 0){
+                        categories.push(tmpCategory);
+                    }
+                }
             });
 
-            let conceptPrefLabels = Array.from(conceptPrefLabelsSet);
-
-            // The final entity results object needs to return arrays instead of sets so
-            // this method does the conversion for us
-            _convertEntityResults(entityResults);
-
-
-            if (conceptPrefLabels.length > 0) {
+            if (categories.length > 0) {
                 lookupResults.push({
                     /**
                      * The entity object provided by the `doLookup` function
@@ -194,7 +182,7 @@ function doLookup(entities, options, cb) {
                          * @default [] (empty array)
                          * @optional
                          */
-                        summary: conceptPrefLabels,
+                        summary: Array.from(conceptsSummaryTags),
                         /**
                          * Data to be passed to the details block for this integration. If null, or undefined then
                          * no details block will be rendered.
@@ -203,16 +191,11 @@ function doLookup(entities, options, cb) {
                          * @type {Object}
                          * @optional
                          */
-                        details: entityResults
+                        details: categories
                     }
                 });
-            } else {
-                // No data for this entity
-                lookupResults.push({
-                    entity: entity,
-                    data: null
-                })
             }
+
             done(null)
         });
     }, function (err) {

@@ -29,15 +29,6 @@ module.exports = {
             "adminOnly"    : false
         },
         {
-            "key"         : "project",
-            "name"        : "Project Name",
-            "description" : "",
-            "default"     : "",
-            "type"        : "text",
-            "userCanEdit" : true,
-            "adminOnly"    : false
-        },
-        {
             "key"         : "username",
             "name"        : "Username",
             "description" : "PoolParty Account Username",
@@ -52,6 +43,42 @@ module.exports = {
             "description" : "PoolParty Account Password",
             "default"     : "",
             "type"        : "password",
+            "userCanEdit" : true,
+            "adminOnly"    : false
+        },
+        {
+            "key"         : "projectId",
+            "name"        : "Project Id",
+            "description" : "Thesaurus Project Id",
+            "default"     : "",
+            "type"        : "text",
+            "userCanEdit" : true,
+            "adminOnly"    : false
+        },
+        {
+            "key"         : "language",
+            "name"        : "Language",
+            "description" : "Language of text being categorized (en|de|es|fr|...)",
+            "default"     : "en",
+            "type"        : "text",
+            "userCanEdit" : true,
+            "adminOnly"    : false
+        },
+        {
+            "key"         : "minimumCategoryScore",
+            "name"        : "Minimum Category Score",
+            "description" : "The minimum score [0.0 - 1.0] for a categories concepts to be included (leave blank for no minimum)",
+            "default"     : "0.0",
+            "type"        : "number",
+            "userCanEdit" : true,
+            "adminOnly"    : false
+        },
+        {
+            "key"         : "minimumConceptScore",
+            "name"        : "Minimum Concept Score",
+            "description" : "The minimum score [0 - 100] for a concept to be included (leave blank for no minimum)",
+            "default"     : "0",
+            "type"        : "number",
             "userCanEdit" : true,
             "adminOnly"    : false
         },
