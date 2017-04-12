@@ -67,7 +67,7 @@ module.exports = {
         {
             "key"         : "minimumCategoryScore",
             "name"        : "Minimum Category Score",
-            "description" : "The minimum score [0.0 - 1.0] for a categories concepts to be included (leave blank for no minimum)",
+            "description" : "The minimum category score [0.0 - 1.0] for a category's concepts to be included in results (leave blank for no minimum)",
             "default"     : "0.0",
             "type"        : "number",
             "userCanEdit" : true,
@@ -76,7 +76,7 @@ module.exports = {
         {
             "key"         : "minimumConceptScore",
             "name"        : "Minimum Concept Score",
-            "description" : "The minimum score [0 - 100] for a concept to be included (leave blank for no minimum)",
+            "description" : "The minimum concept score [0 - 100] for a concept to be included in results (leave blank for no minimum)",
             "default"     : "0",
             "type"        : "number",
             "userCanEdit" : true,
