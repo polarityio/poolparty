@@ -80,13 +80,13 @@ function _lookupEntity(entity, options, done) {
             if (response.statusCode === 401) {
                 done(_createJsonErrorPayload('Authentication Failed',
                     null, response.statusCode, '2B', 'PoolParty Authentication Failed', {
-                        responseMessage: body.message,
+                        //responseMessage: _.defaults(body.message,
                         statusMessage: response.statusMessage
                     }));
             } else {
                 done(_createJsonErrorPayload('Entity Lookup Failed [' + response.statusMessage + ']',
                     null, response.statusCode, '2C', 'PoolParty Entity Lookup Failed', {
-                        responseMessage: body.message,
+                        //responseMessage: body.message,
                         statusMessage: response.statusMessage
                     }));
             }
@@ -332,6 +332,6 @@ function _validateStringOption(options, key) {
 
 module.exports = {
     doLookup: doLookup,
-    validateOptions: validateOptions,
+    //validateOptions: validateOptions,
     startup: startup
 };
