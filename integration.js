@@ -180,9 +180,10 @@ function doLookup(entities, options, cb) {
                 if (err) {
                     done(err);
                 } else {
-                    let tmpEntity = {};
-                    _.assign(tmpEntity, entity);
+
                     conceptsMap.forEach(function (concept, uri) {
+                        let tmpEntity = {};
+                        _.assign(tmpEntity, entity);
                         tmpEntity.value = concept.category + concept.prefLabel;
                         lookupResults.push({
                             entity: tmpEntity,
