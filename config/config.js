@@ -1,5 +1,5 @@
 module.exports = {
-    "acronym":"",
+    "acronym":"" ,
     "customTypes": [
         {
             key: 'all',
