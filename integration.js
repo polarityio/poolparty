@@ -158,6 +158,8 @@ function doLookup(entities, options, cb) {
                                     }else{
                                         if(Array.isArray(body.definitions) && body.definitions.length > 0){
                                             concept.definition = body.definitions[0];
+                                        }else{
+                                            concept.definition = '<No Definition Found>';
                                         }
                                         conceptsMap.set(concept.uri, concept);
                                         nextConcept(null);
