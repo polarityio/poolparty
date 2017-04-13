@@ -184,7 +184,7 @@ function doLookup(entities, options, cb) {
                             entity: entity,
                             displayValue: concept.prefLabel,
                             data: {
-                                summary: [concept.definition.substring(0, 20) + '...'],
+                                summary: [concept.uri],
                                 details: concept
                             }
                         });
