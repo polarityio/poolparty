@@ -161,6 +161,7 @@ function doLookup(entities, options, cb) {
                                         }else{
                                             concept.definition = '<No Definition Found>';
                                         }
+                                        concept.category = category.prefLabel;
                                         conceptsMap.set(concept.uri, concept);
                                         nextConcept(null);
                                     }
@@ -179,12 +180,15 @@ function doLookup(entities, options, cb) {
                 if (err) {
                     done(err);
                 } else {
+                    let tmpEntity = {};
+                    _.assign(tmpEntity, entity);
+                    tmpEntity.value = concept.category + concept.prefLabel;
                     conceptsMap.forEach(function (concept, uri) {
                         lookupResults.push({
-                            entity: entity,
+                            entity: tmpEntity,
                             displayValue: concept.prefLabel,
                             data: {
-                                summary: [concept.uri],
+                                summary: [concept.category],
                                 details: concept
                             }
                         });
