@@ -1,64 +1,8 @@
-<table class="concepts">
-    <tbody>
-    {{#each-in block.data.details as |conceptPrefLabel data|}}
-        <tr class="concept-block">
-            <td>
-                <span class="concept">
-                    <h1>
-                        <a href="{{data.concept.uri}}">{{data.concept.prefLabel}}</a>
-                        <i class="btb bt-external-link"></i>
-                    </h1>
-                </span>
-                <div class="definition">
-                    {{data.definition}}
-                </div>
-                {{#if (and block.userOptions.showBroaderConcepts (gt data.broaderConcepts.length 0))}}
-                    <div class="concept-details">
-                        <h2>Broader Concepts</h2>
-                        <ul>
-                            {{#each data.broaderConcepts as |broaderConcept|}}
-                                <li>
-                                    <strong>
-                                        <a href="{{broaderConcept.uri}}">{{broaderConcept.prefLabel}}</a>
-                                    </strong>
-                                    <i class="btb bt-external-link"></i>
-                                </li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                {{/if}}
-                {{#if (and block.userOptions.showNarrowerConcepts (gt data.narrowerConcepts.length 0))}}
-                    <div class="concept-details">
-                        <h2>Narrower Concepts</h2>
-                        <ul>
-                            {{#each data.narrowerConcepts as |narrowerConcept|}}
-                                <li>
-                                    <strong>
-                                        <a href="{{narrowerConcept.uri}}">{{narrowerConcept.prefLabel}}</a>
-                                    </strong>
-                                    <i class="btb bt-external-link"></i>
-                                </li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                {{/if}}
-                {{#if (and block.userOptions.showRelatedConcepts (gt data.relatedConcepts.length 0))}}
-                    <div class="concept-details">
-                        <h2>Related Concepts</h2>
-                        <ul>
-                            {{#each data.relatedConcepts as |relatedConcept|}}
-                                <li>
-                                    <strong>
-                                        <a href="{{relatedConcept.uri}}">{{relatedConcept.prefLabel}}</a>
-                                    </strong>
-                                    <i class="btb bt-external-link"></i>
-                                </li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                {{/if}}
-            </td>
-        </tr>
-    {{/each-in}}
-    </tbody>
-</table>
+<div class="padding-0-5">
+    <p class="padded">
+        <a href="{{block.data.details.uri}}">View in PoolParty <i class="btb bt-external-link"></i></a>
+    </p>
+</div>
+<div class="definition">
+    {{block.data.details.definition}}
+</div>

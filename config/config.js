@@ -10,14 +10,14 @@ module.exports = {
     "styles":[
         "./styles/poolparty.less"
     ],
-    // "block": {
-    //     "component": {
-    //         "file": "./components/poolparty.js"
-    //     },
-    //     "template": {
-    //         "file": "./templates/poolparty.hbs"
-    //     }
-    // },
+    "block": {
+        "component": {
+            "file": "./components/poolparty.js"
+        },
+        "template": {
+            "file": "./templates/poolparty.hbs"
+        }
+    },
     "options":[
         {
             "key"         : "url",
