@@ -184,7 +184,9 @@ function doLookup(entities, options, cb) {
                     conceptsMap.forEach(function (concept, uri) {
                         let tmpEntity = {};
                         _.assign(tmpEntity, entity);
+                        let ocrText = tmpEntity.value;
                         tmpEntity.value = concept.category + concept.prefLabel;
+                        concept.ocrText = ocrText;
                         lookupResults.push({
                             entity: tmpEntity,
                             displayValue: concept.prefLabel,
