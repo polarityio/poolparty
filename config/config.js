@@ -1,5 +1,5 @@
 module.exports = {
-    "acronym":"Pool",
+    "acronym":"",
     "customTypes": [
         {
             key: 'all',
