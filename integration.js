@@ -182,8 +182,8 @@ function doLookup(entities, options, cb) {
                 } else {
                     let tmpEntity = {};
                     _.assign(tmpEntity, entity);
-                    tmpEntity.value = concept.category + concept.prefLabel;
                     conceptsMap.forEach(function (concept, uri) {
+                        tmpEntity.value = concept.category + concept.prefLabel;
                         lookupResults.push({
                             entity: tmpEntity,
                             displayValue: concept.prefLabel,
