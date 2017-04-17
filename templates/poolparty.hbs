@@ -1,11 +1,13 @@
-<div class="padding-0-5">
-    <p class="padded">
-        <a href="{{block.data.details.uri}}">View in PoolParty <i class="btb bt-external-link"></i></a>
-    </p>
-</div>
-<div class="definition">
-    {{block.data.details.definition}}
-</div>
+{{#each block.data.details.concepts as |concept|}}
+    <div class="definition">
+        <h2>{{concept.category}}</h2>
+        {{concept.definition}}
+        <p class="padded">
+            <a href="{{concept.uri}}">View in PoolParty <i class="btb bt-external-link"></i></a>
+        </p>
+    </div>
+{{/each}}
+
 {{!--
 <h2>OCR Text</h2>
 <div class="definition">

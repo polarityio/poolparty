@@ -122,6 +122,8 @@ function doLookup(entities, options, cb) {
                 return;
             }
 
+            // Groups concepts by label, and then does a secondary group by concept.uri
+            // to remove duplicates within a label
             let conceptsMap = new Map();
 
             if (typeof body === 'undefined' || !Array.isArray(body.categories)) {
@@ -162,7 +164,10 @@ function doLookup(entities, options, cb) {
                                             concept.definition = '<No Definition Found>';
                                         }
                                         concept.category = category.prefLabel;
-                                        conceptsMap.set(concept.uri, concept);
+                                        if(!conceptsMap.has(concept.prefLabel)){
+                                            conceptsMap.set(concept.prefLabel, new Map());
+                                        }
+                                        conceptsMap.get(concept.prefLabel).set(concept.uri, concept);
                                         nextConcept(null);
                                     }
                                 });
@@ -181,21 +186,32 @@ function doLookup(entities, options, cb) {
                     done(err);
                 } else {
 
-                    conceptsMap.forEach(function (concept, uri) {
-                        let tmpEntity = {};
-                        _.assign(tmpEntity, entity);
-                        let ocrText = tmpEntity.value;
-                        tmpEntity.value = concept.category + concept.prefLabel;
-                        concept.ocrText = ocrText;
+
+                    conceptsMap.forEach(function(conceptGroup, prefLabel){
+                        let details = {
+                            concepts: []
+                        };
+                        let mergedCategories = [];
+                        let copiedEntity  = _.assign({}, entity);
+
+                        conceptGroup.forEach(function(concept, uri){
+                            details.concepts.push(concept);
+                            mergedCategories.push(concept.category);
+                        });
+
+                        details.ocrText = copiedEntity.value;
+                        copiedEntity.value = prefLabel;
+
                         lookupResults.push({
-                            entity: tmpEntity,
-                            displayValue: concept.prefLabel,
+                            entity: copiedEntity,
+                            displayValue: prefLabel,
                             data: {
-                                summary: [concept.category],
-                                details: concept
+                                summary: mergedCategories,
+                                details: details
                             }
                         });
                     });
+
                     done(null);
                 }
             });
