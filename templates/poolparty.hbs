@@ -1,12 +1,16 @@
 {{#each block.data.details.concepts as |concept|}}
     <div class="definition">
-        <h2>{{concept.category}}</h2>
-        {{concept.definition}}
         <p class="padded">
-            <a href="{{concept.uri}}">View in PoolParty <i class="btb bt-external-link"></i></a>
+            <a href="{{concept.uri}}">{{concept.prefLabel}}<i class="btb bt-external-link"></i></a>
+            {{#if concept.mapsToDataElement }}
+                <strong>mapsToDataElement</strong>
+                <a href="{{concept.mapsToDataElement.uri}}">{{concept.mapsToDataElement.prefLabel}}<i class="btb bt-external-link"></i></a>
+            {{/if}}
         </p>
+        {{concept.definition}}
     </div>
 {{/each}}
+
 
 {{!--
 <h2>OCR Text</h2>

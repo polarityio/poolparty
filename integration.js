@@ -72,17 +72,17 @@ function _lookupEntity(entity, options, done) {
         json: true
     }, function (err, response, body) {
         let errorCode = 2;
-        _requestErrorHandling(err, response, body, errorCode, function(err){
-           if(err){
-               done(err);
-           }else{
-               done(null, body);
-           }
+        _requestErrorHandling(err, response, body, errorCode, function (err) {
+            if (err) {
+                done(err);
+            } else {
+                done(null, body);
+            }
         });
     });
 }
 
-function _requestErrorHandling(err, response, body, errorCode, cb){
+function _requestErrorHandling(err, response, body, errorCode, cb) {
     if (err) {
         cb(_createJsonErrorPayload("Unable to connect to PoolParty server", null, '500', errorCode + 'A', 'PoolParty HTTP Request Failed', {
             err: err
@@ -124,6 +124,7 @@ function doLookup(entities, options, cb) {
 
             // Groups concepts by label, and then does a secondary group by concept.uri
             // to remove duplicates within a label
+            console.info("CREATING CONCEPTSMAP");
             let conceptsMap = new Map();
 
             if (typeof body === 'undefined' || !Array.isArray(body.categories)) {
@@ -136,16 +137,16 @@ function doLookup(entities, options, cb) {
                     async.each(category.categoryConceptResults, function (concept, nextConcept) {
                         if (concept.score >= options.minimumConceptScore) {
                             //lookup the definition
-                            let uri = options.url + "/PoolParty/api/thesaurus/" + options.projectId + "/concept";
+                            let uri = options.url + "/PoolParty/sparql/RegulatoryOntology";
                             request({
                                 uri: uri,
                                 qs: {
-                                    concept: concept.uri,
-                                    properties: 'skos:definition'
+                                    queryname: 'DataElementMapping',
+                                    regulatoryItem: concept.uri
                                 },
                                 method: 'GET',
                                 headers: {
-                                    'Content-Type': 'application/x-www-form-encoded'
+                                    'Content-Type': 'application/json'
                                 },
                                 auth: {
                                     'user': options.username,
@@ -154,20 +155,29 @@ function doLookup(entities, options, cb) {
                                 json: true
                             }, function (err, response, body) {
                                 let errorCode = 3;
-                                _requestErrorHandling(err, response, body, errorCode, function(err){
-                                    if(err){
+                                _requestErrorHandling(err, response, body, errorCode, function (err) {
+                                    if (err) {
                                         nextConcept(err);
-                                    }else{
-                                        if(Array.isArray(body.definitions) && body.definitions.length > 0){
-                                            concept.definition = body.definitions[0];
-                                        }else{
+                                    } else {
+                                        if (Array.isArray(body.results.bindings) && body.results.bindings.length > 0) {
+                                            concept.definition = body.results.bindings[0].riDefinition.value;
+                                            if (body.results.bindings[0].de) {
+                                                concept.mapsToDataElement = {
+                                                    uri: body.results.bindings[0].de.value,
+                                                    prefLabel: body.results.bindings[0].deName.value
+                                                }
+                                            }
+                                        } else {
                                             concept.definition = '<No Definition Found>';
                                         }
                                         concept.category = category.prefLabel;
-                                        if(!conceptsMap.has(concept.prefLabel)){
-                                            conceptsMap.set(concept.prefLabel, new Map());
+                                        let prefLabelLower = concept.prefLabel.toLowerCase();
+                                        if (conceptsMap.has(prefLabelLower) === false) {
+                                            conceptsMap.set(prefLabelLower, new Map());
                                         }
-                                        conceptsMap.get(concept.prefLabel).set(concept.uri, concept);
+
+                                        conceptsMap.get(prefLabelLower).set(concept.uri, concept);
+
                                         nextConcept(null);
                                     }
                                 });
@@ -185,16 +195,16 @@ function doLookup(entities, options, cb) {
                 if (err) {
                     done(err);
                 } else {
-
-
-                    conceptsMap.forEach(function(conceptGroup, prefLabel){
+                    conceptsMap.forEach(function (conceptGroup, prefLabel) {
+                        console.info(prefLabel);
                         let details = {
                             concepts: []
                         };
                         let mergedCategories = [];
-                        let copiedEntity  = _.assign({}, entity);
+                        let copiedEntity = _.assign({}, entity);
 
-                        conceptGroup.forEach(function(concept, uri){
+                        conceptGroup.forEach(function (concept, uri) {
+                            console.info(uri);
                             details.concepts.push(concept);
                             mergedCategories.push(concept.category);
                         });
