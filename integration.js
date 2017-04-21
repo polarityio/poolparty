@@ -134,16 +134,16 @@ function doLookup(entities, options, cb) {
                     async.each(category.categoryConceptResults, function (concept, nextConcept) {
                         if (concept.score >= options.minimumConceptScore) {
                             //lookup the definition
-                            let uri = options.url + "/PoolParty/api/thesaurus/" + options.projectId + "/concept";
+                            let uri = options.url + "/PoolParty/sparql/RegulatoryOntology";
                             request({
                                 uri: uri,
                                 qs: {
-                                    concept: concept.uri,
-                                    properties: 'skos:definition'
+                                    queryname:'DataElementMapping',
+                                    regulatoryItem: concept.uri
                                 },
                                 method: 'GET',
                                 headers: {
-                                    'Content-Type': 'application/x-www-form-encoded'
+                                    'Content-Type': 'application/json'
                                 },
                                 auth: {
                                     'user': options.username,
@@ -156,11 +156,18 @@ function doLookup(entities, options, cb) {
                                     if(err){
                                         nextConcept(err);
                                     }else{
-                                        if(Array.isArray(body.definitions) && body.definitions.length > 0){
-                                            concept.definition = body.definitions[0];
+                                        if(Array.isArray(body.results.bindings) && body.results.bindings.length > 0){
+                                            concept.definition = body.results.bindings[0].riDefinition.value;
+                                            if(body.results.bindings[0].de){
+                                                concept.mapsToDataElement = {
+                                                    uri: body.results.bindings[0].de.value,
+                                                    prefLabel: body.results.bindings[0].deName.value
+                                                }
+                                            }
                                         }else{
                                             concept.definition = '<No Definition Found>';
                                         }
+
                                         concept.category = category.prefLabel;
                                         conceptsMap.set(concept.uri, concept);
                                         nextConcept(null);

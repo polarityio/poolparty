@@ -1,6 +1,10 @@
 <div class="padding-0-5">
     <p class="padded">
-        <a href="{{block.data.details.uri}}">View in PoolParty <i class="btb bt-external-link"></i></a>
+        <a href="{{concept.uri}}">{{concept.prefLabel}}<i class="btb bt-external-link"></i></a>
+        {{#if concept.mapsToDataElement }}
+            <strong>mapsToDataElement</strong>
+            <a href="{{concept.mapsToDataElement.uri}}">{{concept.mapsToDataElement.prefLabel}}<i class="btb bt-external-link"></i></a>
+        {{/if}}
     </p>
 </div>
 <div class="definition">
