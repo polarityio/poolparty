@@ -1,9 +1,13 @@
 <div class="padding-0-5">
     <p class="padded">
-        <a href="{{concept.uri}}">{{concept.prefLabel}}<i class="btb bt-external-link"></i></a>
-        {{#if concept.mapsToDataElement }}
+        <a href="{{block.data.details.uri}}">
+            {{block.data.details.prefLabel}}<i class="btb bt-external-link"></i>
+        </a>
+        {{#if block.data.details.mapsToDataElement}}
             <strong>mapsToDataElement</strong>
-            <a href="{{concept.mapsToDataElement.uri}}">{{concept.mapsToDataElement.prefLabel}}<i class="btb bt-external-link"></i></a>
+            <a href="{{block.data.details.mapsToDataElement.uri}}">
+                {{block.data.details.mapsToDataElement.prefLabel}}<i class="btb bt-external-link"></i>
+            </a>
         {{/if}}
     </p>
 </div>
