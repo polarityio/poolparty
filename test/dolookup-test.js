@@ -568,18 +568,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsHemorrhage"
                         },
                         "displayValue": "Hemorrhage",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D006470"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D006470",
-                                "prefLabel": "Hemorrhage"
+                                "prefLabel": "Hemorrhage",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -589,18 +591,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Otorhinolaryngologic DiseasesTinnitus"
                         },
                         "displayValue": "Tinnitus",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D014012"
+                                "Otorhinolaryngologic Diseases"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D014012",
-                                "prefLabel": "Tinnitus"
+                                "prefLabel": "Tinnitus",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Otorhinolaryngologic Diseases",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -610,18 +614,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsFever"
                         },
                         "displayValue": "Fever",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D005334"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 15,
                                 "uri": "http://www.nlm.nih.gov/mesh/D005334",
-                                "prefLabel": "Fever"
+                                "prefLabel": "Fever",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -631,18 +637,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Musculoskeletal and Neural Physiological PhenomenaPain"
                         },
                         "displayValue": "Pain",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D010146"
+                                "Musculoskeletal and Neural Physiological Phenomena"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 16,
                                 "uri": "http://www.nlm.nih.gov/mesh/D010146",
-                                "prefLabel": "Pain"
+                                "prefLabel": "Pain",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Musculoskeletal and Neural Physiological Phenomena",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -652,18 +660,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsUlcer"
                         },
                         "displayValue": "Ulcer",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D014456"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D014456",
-                                "prefLabel": "Ulcer"
+                                "prefLabel": "Ulcer",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -673,18 +683,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsDeath"
                         },
                         "displayValue": "Death",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D003643"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 7,
                                 "uri": "http://www.nlm.nih.gov/mesh/D003643",
-                                "prefLabel": "Death"
+                                "prefLabel": "Death",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -694,18 +706,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Organic ChemicalsSalicylates"
                         },
                         "displayValue": "Salicylates",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D012459"
+                                "Organic Chemicals"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D012459",
-                                "prefLabel": "Salicylates"
+                                "prefLabel": "Salicylates",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Organic Chemicals",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -715,18 +729,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Organic ChemicalsSalicylic Acid"
                         },
                         "displayValue": "Salicylic Acid",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D020156"
+                                "Organic Chemicals"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 14,
                                 "uri": "http://www.nlm.nih.gov/mesh/D020156",
-                                "prefLabel": "Salicylic Acid"
+                                "prefLabel": "Salicylic Acid",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Organic Chemicals",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -736,18 +752,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Organic ChemicalsAspirin"
                         },
                         "displayValue": "Aspirin",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D001241"
+                                "Organic Chemicals"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 59,
                                 "uri": "http://www.nlm.nih.gov/mesh/D001241",
-                                "prefLabel": "Aspirin"
+                                "prefLabel": "Aspirin",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Organic Chemicals",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -757,18 +775,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "EukaryotaAnimals"
                         },
                         "displayValue": "Animals",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D000818"
+                                "Eukaryota"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 13,
                                 "uri": "http://www.nlm.nih.gov/mesh/D000818",
-                                "prefLabel": "Animals"
+                                "prefLabel": "Animals",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Eukaryota",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -778,18 +798,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "EukaryotaHumans"
                         },
                         "displayValue": "Humans",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D006801"
+                                "Eukaryota"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 13,
                                 "uri": "http://www.nlm.nih.gov/mesh/D006801",
-                                "prefLabel": "Humans"
+                                "prefLabel": "Humans",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Eukaryota",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -799,18 +821,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Cardiovascular DiseasesStroke"
                         },
                         "displayValue": "Stroke",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D020521"
+                                "Cardiovascular Diseases"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 9,
                                 "uri": "http://www.nlm.nih.gov/mesh/D020521",
-                                "prefLabel": "Stroke"
+                                "prefLabel": "Stroke",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Cardiovascular Diseases",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -820,18 +844,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Health Care Economics and OrganizationsPatents as Topic"
                         },
                         "displayValue": "Patents as Topic",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D010330"
+                                "Health Care Economics and Organizations"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 2,
                                 "uri": "http://www.nlm.nih.gov/mesh/D010330",
-                                "prefLabel": "Patents as Topic"
+                                "prefLabel": "Patents as Topic",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Health Care Economics and Organizations",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -841,18 +867,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Health Care Economics and OrganizationsEconomics"
                         },
                         "displayValue": "Economics",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D004467"
+                                "Health Care Economics and Organizations"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 11,
                                 "uri": "http://www.nlm.nih.gov/mesh/D004467",
-                                "prefLabel": "Economics"
+                                "prefLabel": "Economics",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Health Care Economics and Organizations",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -862,18 +890,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "PersonsChild"
                         },
                         "displayValue": "Child",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D002648"
+                                "Persons"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D002648",
-                                "prefLabel": "Child"
+                                "prefLabel": "Child",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Persons",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -883,18 +913,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "PersonsAdolescent"
                         },
                         "displayValue": "Adolescent",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D000293"
+                                "Persons"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D000293",
-                                "prefLabel": "Adolescent"
+                                "prefLabel": "Adolescent",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Persons",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -904,18 +936,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "PersonsMinors"
                         },
                         "displayValue": "Minors",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D033242"
+                                "Persons"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 16,
                                 "uri": "http://www.nlm.nih.gov/mesh/D033242",
-                                "prefLabel": "Minors"
+                                "prefLabel": "Minors",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Persons",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -925,18 +959,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Digestive SystemStomach"
                         },
                         "displayValue": "Stomach",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D013270"
+                                "Digestive System"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D013270",
-                                "prefLabel": "Stomach"
+                                "prefLabel": "Stomach",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Digestive System",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -946,18 +982,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Stomatognathic SystemMouth"
                         },
                         "displayValue": "Mouth",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D009055"
+                                "Stomatognathic System"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D009055",
-                                "prefLabel": "Mouth"
+                                "prefLabel": "Mouth",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Stomatognathic System",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -967,18 +1005,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Cardiovascular SystemBlood Vessels"
                         },
                         "displayValue": "Blood Vessels",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D001808"
+                                "Cardiovascular System"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 11,
                                 "uri": "http://www.nlm.nih.gov/mesh/D001808",
-                                "prefLabel": "Blood Vessels"
+                                "prefLabel": "Blood Vessels",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Cardiovascular System",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -988,18 +1028,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Cardiovascular SystemHeart"
                         },
                         "displayValue": "Heart",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D006321"
+                                "Cardiovascular System"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 23,
                                 "uri": "http://www.nlm.nih.gov/mesh/D006321",
-                                "prefLabel": "Heart"
+                                "prefLabel": "Heart",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Cardiovascular System",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1009,18 +1051,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Investigative TechniquesRisk"
                         },
                         "displayValue": "Risk",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D012306"
+                                "Investigative Techniques"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 20,
                                 "uri": "http://www.nlm.nih.gov/mesh/D012306",
-                                "prefLabel": "Risk"
+                                "prefLabel": "Risk",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Investigative Techniques",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1030,18 +1074,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "CellsBlood Platelets"
                         },
                         "displayValue": "Blood Platelets",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D001792"
+                                "Cells"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 21,
                                 "uri": "http://www.nlm.nih.gov/mesh/D001792",
-                                "prefLabel": "Blood Platelets"
+                                "prefLabel": "Blood Platelets",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Cells",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1051,18 +1097,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Hemic and Immune SystemsBlood"
                         },
                         "displayValue": "Blood",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D001769"
+                                "Hemic and Immune Systems"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 36,
                                 "uri": "http://www.nlm.nih.gov/mesh/D001769",
-                                "prefLabel": "Blood"
+                                "prefLabel": "Blood",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Hemic and Immune Systems",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1072,18 +1120,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Physiological PhenomenaDiet"
                         },
                         "displayValue": "Diet",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D004032"
+                                "Physiological Phenomena"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 12,
                                 "uri": "http://www.nlm.nih.gov/mesh/D004032",
-                                "prefLabel": "Diet"
+                                "prefLabel": "Diet",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Physiological Phenomena",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1093,18 +1143,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Chemical Actions and UsesAnti-Inflammatory Agents, Non-Steroidal"
                         },
                         "displayValue": "Anti-Inflammatory Agents, Non-Steroidal",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D000894"
+                                "Chemical Actions and Uses"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 11,
                                 "uri": "http://www.nlm.nih.gov/mesh/D000894",
-                                "prefLabel": "Anti-Inflammatory Agents, Non-Steroidal"
+                                "prefLabel": "Anti-Inflammatory Agents, Non-Steroidal",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Chemical Actions and Uses",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1114,18 +1166,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Macromolecular SubstancesProstaglandin-Endoperoxide Synthases"
                         },
                         "displayValue": "Prostaglandin-Endoperoxide Synthases",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D011451"
+                                "Macromolecular Substances"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 3,
                                 "uri": "http://www.nlm.nih.gov/mesh/D011451",
-                                "prefLabel": "Prostaglandin-Endoperoxide Synthases"
+                                "prefLabel": "Prostaglandin-Endoperoxide Synthases",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Macromolecular Substances",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1135,18 +1189,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Behavior and Behavior MechanismsAffect"
                         },
                         "displayValue": "Affect",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D000339"
+                                "Behavior and Behavior Mechanisms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 3,
                                 "uri": "http://www.nlm.nih.gov/mesh/D000339",
-                                "prefLabel": "Affect"
+                                "prefLabel": "Affect",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Behavior and Behavior Mechanisms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1156,18 +1212,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Virus DiseasesChickenpox"
                         },
                         "displayValue": "Chickenpox",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D002644"
+                                "Virus Diseases"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 5,
                                 "uri": "http://www.nlm.nih.gov/mesh/D002644",
-                                "prefLabel": "Chickenpox"
+                                "prefLabel": "Chickenpox",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Virus Diseases",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1177,21 +1235,24 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Metabolic PhenomenaMetabolism"
                         },
                         "displayValue": "Metabolism",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D008660"
+                                "Metabolic Phenomena"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 13,
                                 "uri": "http://www.nlm.nih.gov/mesh/D008660",
-                                "prefLabel": "Metabolism"
+                                "prefLabel": "Metabolism",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Metabolic Phenomena",
+                                "ocrText": "helloworld"
                             }
                         }
                     }
+
                 ]
             );
             done();
@@ -1219,18 +1280,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsHemorrhage"
                         },
                         "displayValue": "Hemorrhage",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D006470"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D006470",
-                                "prefLabel": "Hemorrhage"
+                                "prefLabel": "Hemorrhage",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1240,18 +1303,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsTinnitus"
                         },
                         "displayValue": "Tinnitus",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D014012"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D014012",
-                                "prefLabel": "Tinnitus"
+                                "prefLabel": "Tinnitus",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1261,18 +1326,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsFever"
                         },
                         "displayValue": "Fever",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D005334"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 15,
                                 "uri": "http://www.nlm.nih.gov/mesh/D005334",
-                                "prefLabel": "Fever"
+                                "prefLabel": "Fever",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1282,18 +1349,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsPain"
                         },
                         "displayValue": "Pain",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D010146"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 16,
                                 "uri": "http://www.nlm.nih.gov/mesh/D010146",
-                                "prefLabel": "Pain"
+                                "prefLabel": "Pain",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1303,18 +1372,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsUlcer"
                         },
                         "displayValue": "Ulcer",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D014456"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 6,
                                 "uri": "http://www.nlm.nih.gov/mesh/D014456",
-                                "prefLabel": "Ulcer"
+                                "prefLabel": "Ulcer",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1324,24 +1395,24 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsDeath"
                         },
                         "displayValue": "Death",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D003643"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 7,
                                 "uri": "http://www.nlm.nih.gov/mesh/D003643",
-                                "prefLabel": "Death"
+                                "prefLabel": "Death",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     }
-
                 ]
-
             );
             done();
         });
@@ -1358,7 +1429,6 @@ describe('doLookup()', function () {
             types: ['custom.all'],
             value: options.text
         }], newOptions, function (err, result) {
-            //console.info(JSON.stringify(result, null, 4));
             expect(err).to.be.null;
             expect(result).to.deep.equal(
                 [
@@ -1368,18 +1438,20 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsFever"
                         },
                         "displayValue": "Fever",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D005334"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 15,
                                 "uri": "http://www.nlm.nih.gov/mesh/D005334",
-                                "prefLabel": "Fever"
+                                "prefLabel": "Fever",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     },
@@ -1389,22 +1461,23 @@ describe('doLookup()', function () {
                             "types": [
                                 "custom.all"
                             ],
-                            "value": "helloworld"
+                            "value": "Pathological Conditions, Signs and SymptomsPain"
                         },
                         "displayValue": "Pain",
                         "data": {
                             "summary": [
-                                "http://www.nlm.nih.gov/mesh/D010146"
+                                "Pathological Conditions, Signs and Symptoms"
                             ],
                             "details": {
-                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
                                 "score": 16,
                                 "uri": "http://www.nlm.nih.gov/mesh/D010146",
-                                "prefLabel": "Pain"
+                                "prefLabel": "Pain",
+                                "definition": "Report the Expected Loss Given Default (ELGD) parameter for the account as defined in the most recent capital framework. More specifically, report the ELGD associated to the account’s corresponding segment.  Missing or unavailable values should be left blank.If the BHC generates this field, they are required to report it. ELGD is an input into the LGD calculation.",
+                                "category": "Pathological Conditions, Signs and Symptoms",
+                                "ocrText": "helloworld"
                             }
                         }
                     }
-
                 ]
 
             );
